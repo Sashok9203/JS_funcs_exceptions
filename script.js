@@ -12,23 +12,32 @@ getBracket(4);
 
 //Task 2
 console.info("------------ Task 2 ------------");
+
+function isNumber(number){return typeof(number) !== 'number' || Number.isNaN(number) }
+
 function getRectangleArea(width, height)
 {
-    if(typeof(width)!=='number' || Number.isNaN(width) )
+    if(isNumber(width) )
         throw new TypeError("Invalid width value ! ! !");
-    else if(typeof(height)!=='number'  || Number.isNaN(height))
+    else if(isNumber(height))
         throw new TypeError("Invalid height value ! ! !");
     return width * height;
 }
 
-let width = "123";
-let height = 12;
+function displayRectangleArea(width, height)
+{
+    console.info(`Area of the rectangle with width ${width} and height ${height} = ${getRectangleArea(width, height)}`);
+}
 
-try{getRectangleArea(width, height);}
+let width = 9;
+let height = 5;
+displayRectangleArea(width, height);
+width = "123";
+try{displayRectangleArea(width, height);}
 catch(ex){console.error(ex.message);}
 width = 23;
 height = true;
-try{getRectangleArea(width, height);}
+try{displayRectangleArea(width, height);}
 catch(ex){console.error(ex.message);}
 
 //Task 3
@@ -44,7 +53,7 @@ class WeekdayError extends Error{
 function showWeekdayName(day)
 {
     const days = ["Monday","Tuesday","Wednesday", "Thursday", "Friday","Saturday","Sunday"];
-    if(typeof(day)!=='number' || Number.isNaN(day) || day < 1 || day > 7) 
+    if(isNumber(day) || day < 1 || day > 7) 
         throw new WeekdayError();
     console.info(days[day-1]);
 }
